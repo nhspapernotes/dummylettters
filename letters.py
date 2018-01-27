@@ -175,6 +175,21 @@ def medications():
     'Amiloride')
     return random.choice(meds)
 
+def newname():
+    #random names
+    first_names=('John','Andy','Joe', 'Charles', 'Donald', 'Terrance')
+    last_names=('Johnson','Smith','Williams', 'Sanchez', 'Holt', 'Selby')
+    full_name = random.choice(first_names) + " " + random.choice(last_names)
+    return full_name
+
+def dob():
+    #random date
+    year = random.randint(1930, 2000)
+    month = random.randint(1, 12)
+    day = random.randint(1, 28)
+    birth_date = date(year, month, day)
+    return birth_date
+
 def clinicletter():
     stylesheet=getSampleStyleSheet()
     normalStyle = stylesheet['Normal']
@@ -193,16 +208,9 @@ def clinicletter():
     c.drawString(100,735, "Somewhere")
     c.drawString(100,720, "NW4 FTP")
 
-    #random names
-    first_names=('John','Andy','Joe', 'Charles', 'Donald', 'Terrance')
-    last_names=('Johnson','Smith','Williams', 'Sanchez', 'Holt', 'Selby')
-    full_name = random.choice(first_names) + " " + random.choice(last_names)
+    full_name = newname()
 
-    #random date
-    year = random.randint(1930, 2000)
-    month = random.randint(1, 12)
-    day = random.randint(1, 28)
-    birth_date = date(year, month, day)
+    birth_date = dob()
 
     nhsno = random.randint(4440001111, 7001110000)
 
@@ -246,4 +254,104 @@ def clinicletter():
     p.drawOn(c, 100, y)
     c.save()
 
-clinicletter()
+def echoreport():
+    filename = newfilename()
+    c = Canvas('%s.pdf' % filename)
+
+    c.setFont("Helvetica", 14)
+    c.drawString(75, 795, "DEPARTMENT OF ECHOCARDIOGRAPHY")
+    c.setFont("Helvetica", 12)
+    c.drawString(75, 780, "St Elsewhere Hospital")
+    c.drawString(75, 770, "A place")
+    c.drawString(75, 760, "In the world")
+    c.drawString(75, 750, "Somewhere")
+    c.setFont("Helvetica", 10)
+    c.drawString(75, 740, "020 3672 3782")
+
+
+
+    c.setFont("Helvetica-Bold", 20)
+    c.drawString(150, 650, "ECHOCARDIOGRAPHY REPORT")
+
+    c.line(100, 680, 500, 680)
+    c.line(100, 630, 500, 630)
+    c.line(100, 550, 500, 550)
+    c.line(100, 450, 500, 450)
+    c.line(100, 300, 500, 300)
+    c.line(100, 110, 500, 110)
+
+
+    #Bold stuff
+    c.setFont("Helvetica-Bold", 12)
+
+    #demographics
+    c.drawString(150, 600, "Name:")
+    c.drawString(330, 600, "Date of Birth:")
+    c.drawString(330, 570, "NHS number:")
+    c.drawString(150, 570, "Urgency:")
+
+    c.drawString(100, 530, "Summary:")
+
+    c.drawString(100, 430, "Valves:")
+
+
+
+    c.drawString(100, 280, "Numbers:")
+
+    c.drawString(150, 260, "Aortic Root Diameter:")
+    c.drawString(150, 245, "Left Atrial Diameter:")
+    c.drawString(150, 230, "LVESD:")
+    c.drawString(150, 215, "LVEDD:")
+    c.drawString(150, 200, "Septal Thickness:")
+    c.drawString(150, 185, "LVPW Thickness:")
+    c.drawString(150, 170, "Ejection Fraction:")
+    c.drawString(150, 155, "Mitral E Septal Sep:")
+    c.drawString(150, 140, "LVOT Diameter:")
+    c.drawString(150, 125, "Fractional Shortening:")
+
+    def random_decimal():
+        return random.randint(155, 389)/100.0
+
+    ARD = random_decimal()
+    LAD = random_decimal()
+    LVESD = random_decimal()
+    LVEDD = random_decimal()
+    ST = random_decimal()
+    LVPW = random_decimal()
+    EF = random.randint(15, 70)
+    EPSS = random_decimal()
+    LVOT = random_decimal()
+    FS = random.randint(15, 70)
+
+    c.setFont("Helvetica", 12)
+
+    c.drawString(350, 260, str(ARD))
+    c.drawString(350, 245, str(LAD) )
+    c.drawString(350, 230, str(LVESD) )
+    c.drawString(350, 215, str(LVEDD) )
+    c.drawString(350, 200, str(ST) )
+    c.drawString(350, 185, str(LVPW) )
+    c.drawString(350, 170, str(EF) + "%" )
+    c.drawString(350, 155, str(EPSS) )
+    c.drawString(350, 140, str(LVOT) )
+    c.drawString(350, 125, str(FS) + "%" )
+
+    c.drawString(120, 400, "Aortic: blah blah blah")
+    c.drawString(120, 370, "Mitral: seems aiight")
+    c.drawString(120, 340, "Pulmonary: Not adequately visualised")
+    c.drawString(120, 310, "Tricuspid: adkgfksaeyirw")
+
+    name = newname()
+    birth_date = dob()
+    nhsno = random.randint(4440001111, 7001110000)
+
+    c.drawString(205, 600, name)
+    c.drawString(410, 600, str(birth_date))
+    c.drawString(410, 570, str(nhsno))
+    c.drawString(205, 570, "elective")
+
+
+    c.save()
+
+#clinicletter()
+echoreport()
